@@ -17,3 +17,14 @@ dependencies {
 }
 ```
 
+### Usage
+
+```java
+
+import hu.akarnokd.rxjava3.android.*;
+import io.reactivex.rxjava3.core.*;
+
+Flowable.intervalRange(1, 10, 1, 1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+.subscribe(System.out::println);
+```
+
