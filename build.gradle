@@ -1,0 +1,25 @@
+subprojects {
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+            jcenter()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.vanniktech:gradle-maven-publish-plugin:0.8.0'
+        }
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+ext {
+    minSdkVersion = 9
+    compileSdkVersion = 28
+    sourceCompatibility = JavaVersion.VERSION_1_7
+}

@@ -1,0 +1,3 @@
+rootProject.name='androidinterop-root'
+
+include ':androidinterop'
