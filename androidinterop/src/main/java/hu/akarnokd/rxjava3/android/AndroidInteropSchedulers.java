@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.core.Scheduler;
 import java.util.concurrent.Callable;
 
 /** Android-specific Schedulers. */
-public final class AndroidSchedulers {
+public final class AndroidInteropSchedulers {
 
     private static final class MainHolder {
         static final Scheduler DEFAULT
@@ -72,7 +72,7 @@ public final class AndroidSchedulers {
         return new HandlerScheduler(new Handler(looper), async);
     }
 
-    private AndroidSchedulers() {
+    private AndroidInteropSchedulers() {
         throw new AssertionError("No instances.");
     }
 }

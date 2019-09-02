@@ -18,6 +18,13 @@ android {
     libraryVariants.all {
         it.generateBuildConfig.enabled = false
     }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
 }
 
 dependencies {
@@ -29,3 +36,15 @@ dependencies {
 
 
 apply plugin: "com.vanniktech.maven.publish"
+
+apply plugin: 'jacoco-android'
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
+}

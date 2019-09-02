@@ -14,7 +14,7 @@
 package hu.akarnokd.rxjava3.android;
 
 import android.os.Looper;
-import hu.akarnokd.rxjava3.android.AndroidSchedulers;
+
 import io.reactivex.rxjava3.disposables.Disposable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -31,11 +31,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * commonly used when creating custom observables using the following pattern:
  * <pre><code>
  * &#064;Override public void subscribe(Observer<? extends T> o) {
- *   MainThreadDisposable.verifyMainThread();
+ *   AbstractDisposeOnMainThread.verifyMainThread();
  *
  *   // TODO setup behavior
  *
- *    o.onSubscribe(new MainThreadDisposable() {
+ *    o.onSubscribe(new AbstractDisposeOnMainThread() {
  *     &#064;Override protected void onDispose() {
  *       // TODO undo behavior
  *     }
@@ -43,14 +43,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * }
  * </code></pre>
  */
-public abstract class MainThreadDisposable implements Disposable {
+public abstract class AbstractDisposeOnMainThread implements Disposable {
     /**
      * Verify that the calling thread is the Android main thread.
      * <p>
      * Calls to this method are usually preconditions for subscription behavior which instances of
      * this class later undo. See the class documentation for an example.
      *
-     * @throws IllegalStateException when called from any other thread.
+     * @throws java.lang.IllegalStateException when called from any other thread.
      */
     public static void verifyMainThread() {
         if (Looper.myLooper() != Looper.getMainLooper()) {
@@ -72,7 +72,7 @@ public abstract class MainThreadDisposable implements Disposable {
             if (Looper.myLooper() == Looper.getMainLooper()) {
                 onDispose();
             } else {
-                AndroidSchedulers.mainThread().scheduleDirect(new Runnable() {
+                AndroidInteropSchedulers.mainThread().scheduleDirect(new Runnable() {
                     @Override public void run() {
                         onDispose();
                     }

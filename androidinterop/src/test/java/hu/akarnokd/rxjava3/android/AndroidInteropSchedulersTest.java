@@ -39,7 +39,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public final class AndroidSchedulersTest {
+public final class AndroidInteropSchedulersTest {
 
     @Before @After
     public void setUpAndTearDown() {
@@ -57,17 +57,17 @@ public final class AndroidSchedulersTest {
             }
         });
 
-        assertSame(newScheduler, AndroidSchedulers.mainThread());
+        assertSame(newScheduler, AndroidInteropSchedulers.mainThread());
         assertEquals(1, called.get());
 
-        assertSame(newScheduler, AndroidSchedulers.mainThread());
+        assertSame(newScheduler, AndroidInteropSchedulers.mainThread());
         assertEquals(2, called.get());
     }
 
     @Test
     public void fromNullThrows() {
         try {
-            AndroidSchedulers.from(null);
+            AndroidInteropSchedulers.from(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("looper == null", e.getMessage());
@@ -77,7 +77,7 @@ public final class AndroidSchedulersTest {
     @Test
     public void fromNullThrowsTwoArg() {
         try {
-            AndroidSchedulers.from(null, false);
+            AndroidInteropSchedulers.from(null, false);
             fail();
         } catch (NullPointerException e) {
             assertEquals("looper == null", e.getMessage());
@@ -86,7 +86,7 @@ public final class AndroidSchedulersTest {
 
     @Test
     public void fromReturnsUsableScheduler() {
-        assertNotNull(AndroidSchedulers.from(Looper.getMainLooper()));
+        assertNotNull(AndroidInteropSchedulers.from(Looper.getMainLooper()));
     }
 
     @Test
@@ -97,7 +97,7 @@ public final class AndroidSchedulersTest {
         mainLooper.pause();
         ShadowMessageQueue mainMessageQueue = shadowOf(Looper.getMainLooper().getQueue());
 
-        Scheduler main = AndroidSchedulers.from(Looper.getMainLooper(), true);
+        Scheduler main = AndroidInteropSchedulers.from(Looper.getMainLooper(), true);
         main.scheduleDirect(new Runnable() {
             @Override public void run() {
             }

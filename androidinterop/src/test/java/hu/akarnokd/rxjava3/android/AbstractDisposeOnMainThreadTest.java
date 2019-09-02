@@ -13,7 +13,6 @@
  */
 package hu.akarnokd.rxjava3.android;
 
-import hu.akarnokd.rxjava3.android.MainThreadDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -32,9 +31,9 @@ import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest=Config.NONE)
-public final class MainThreadDisposableTest {
+public final class AbstractDisposeOnMainThreadTest {
   @Test public void verifyDoesNotThrowOnMainThread() throws InterruptedException {
-    MainThreadDisposable.verifyMainThread();
+    AbstractDisposeOnMainThread.verifyMainThread();
     // Robolectric tests run on its main thread.
   }
 
@@ -43,7 +42,7 @@ public final class MainThreadDisposableTest {
     new Thread(new Runnable() {
       @Override public void run() {
         try {
-          MainThreadDisposable.verifyMainThread();
+          AbstractDisposeOnMainThread.verifyMainThread();
           fail();
         } catch (IllegalStateException e) {
           assertTrue(e.getMessage().startsWith("Expected to be called on the main thread"));
@@ -59,7 +58,7 @@ public final class MainThreadDisposableTest {
     ShadowLooper.pauseMainLooper();
 
     final AtomicBoolean called = new AtomicBoolean();
-    new MainThreadDisposable() {
+    new AbstractDisposeOnMainThread() {
       @Override protected void onDispose() {
         called.set(true);
       }
@@ -71,7 +70,7 @@ public final class MainThreadDisposableTest {
   @Test public void unsubscribeTwiceDoesNotRunTwice() {
     final AtomicInteger called = new AtomicInteger(0);
 
-    Disposable disposable = new MainThreadDisposable() {
+    Disposable disposable = new AbstractDisposeOnMainThread() {
       @Override protected void onDispose() {
         called.incrementAndGet();
       }
@@ -91,7 +90,7 @@ public final class MainThreadDisposableTest {
     final AtomicBoolean called = new AtomicBoolean();
     new Thread(new Runnable() {
       @Override public void run() {
-        new MainThreadDisposable() {
+        new AbstractDisposeOnMainThread() {
           @Override protected void onDispose() {
             called.set(true);
           }
@@ -109,7 +108,7 @@ public final class MainThreadDisposableTest {
 
   @Test
   public void disposedState() {
-    MainThreadDisposable disposable = new MainThreadDisposable() {
+    AbstractDisposeOnMainThread disposable = new AbstractDisposeOnMainThread() {
       @Override protected void onDispose() {
       }
     };
