@@ -48,3 +48,6 @@ jacocoAndroidUnitTestReport {
     html.enabled true
     xml.enabled true
 }
+
+check.dependsOn jacocoTestReport
+build.dependsOn jacocoTestReport

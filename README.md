@@ -24,7 +24,15 @@ dependencies {
 import hu.akarnokd.rxjava3.android.*;
 import io.reactivex.rxjava3.core.*;
 
-Flowable.intervalRange(1, 10, 1, 1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+Flowable.intervalRange(1, 10, 1, 1, TimeUnit.SECONDS, AndroidInteropSchedulers.mainThread())
 .subscribe(System.out::println);
+```
+
+#### plugins for overrides
+
+```java
+import hu.akarnokd.rxjava3.android.*;
+
+AndroidInteropPlugins.setMainThreadSchedulerHandler(scheduler -> scheduler);
 ```
 
