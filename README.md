@@ -3,7 +3,7 @@ Interop library for exposing Android's main thread and loopers as RxJava 3 Sched
 
 Ported from https://github.com/ReactiveX/RxAndroid
 
-<a href='https://travis-ci.org/akarnokd/RxJavaAndroidInterop/builds'><img src='https://travis-ci.org/akarnokd/RxJavaAndroidInterop.svg?branch=master'></a>
+<a href='https://travis-ci.com/akarnokd/RxJavaAndroidInterop/builds'><img src='https://travis-ci.com/akarnokd/RxJavaAndroidInterop.svg?branch=master'></a>
 [![codecov.io](http://codecov.io/github/akarnokd/RxJavaAndroidInterop/coverage.svg?branch=master)](http://codecov.io/github/akarnokd/RxJavaAndroidInterop?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-android-interop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-android-interop)
 
