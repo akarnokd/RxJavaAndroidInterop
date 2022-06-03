@@ -10,7 +10,7 @@ subprojects {
         }
         dependencies {
             classpath 'com.android.tools.build:gradle:3.4.1'
-            classpath 'com.vanniktech:gradle-maven-publish-plugin:0.8.0'
+            classpath 'com.vanniktech:gradle-maven-publish-plugin:0.20.0'
             classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
         }
     }
